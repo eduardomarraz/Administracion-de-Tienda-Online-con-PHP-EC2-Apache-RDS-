@@ -6,11 +6,11 @@
  ----------------------------------------------------------------- 
 ### Multi-website Practice with AWS CloudFront
 
-#### Step 1:
+Pasos:
 Configuración de una Instancia EC2 en AWS
 Este repositorio contiene instrucciones detalladas para configurar una instancia EC2 en AWS y establecer un servidor web utilizando Apache y PHP.
 
-Pasos
+#### Step 1:
 Paso 1: Configuración de la Instancia EC2
 Inicia sesión en la Consola de AWS y navega a EC2:
 Inicia sesión en tu cuenta de AWS y dirígete al servicio EC2.
@@ -21,10 +21,12 @@ Elige el tipo de instancia t2.micro.
 Configura adecuadamente los ajustes de seguridad para permitir el tráfico HTTP y SSH.
 Crea una nueva clave de par de claves o utiliza una existente para acceder a tu instancia mediante SSH.
 Lanza la instancia.
+#### Step 2:
 Paso 2: Conexión a la Instancia EC2 mediante SSH
 Opciones para Conectarse:
 Utiliza el botón “Conectar” que aparece cuando seleccionas la EC2.
 Utiliza tu cliente SSH para conectarte a tu instancia EC2 utilizando la dirección IP pública proporcionada por AWS y la clave de par de claves en Cloud9.
+#### Step 3:
 Paso 3: Instalación y Configuración del Servidor Web Apache
 Ejecución de Comandos:
 Una vez conectado a la instancia EC2, ejecuta los siguientes comandos:
@@ -47,15 +49,18 @@ sudo dnf install mysql-community-client -y
 sudo dnf install mysql-community-server -y
 sudo service httpd restart
 ```
+#### Step 4:
 Paso 4: Creación de RDS
 Configuración de RDS:
 Elige la opción “easy create”, motor de base de datos “mysql”.
 Selecciona el tamaño “free trial” y configura las credenciales.
 En la opción de “setup EC2 connection”, elige tu instancia creada anteriormente.
+#### Step 5:
 Paso 5: Creación de Tabla en RDS
 Conexión y Creación:
 Conéctate a la base de datos desde la instancia EC2.
 Una vez conectado, crea la base de datos y la tabla necesarias.
+#### Step 6:
 Paso 6: Creación de Scripts PHP para Procesar los Productos
 Creación de Archivos:
 Crea los archivos PHP y CSS dentro de la carpeta html con el siguiente comando:
