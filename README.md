@@ -49,14 +49,6 @@ Utiliza el siguiente comando para instalar Docker en tu instancia
  ```json
 sudo yum install -y docker
 ```
-
-```json
-sudo yum update -y
-```
-Utiliza el siguiente comando para instalar Docker en tu instancia:
-```json
-sudo yum install -y docker
-```
 Arrancar Docker:
 Inicia el servicio Docker con el siguiente comando:
 ```json
