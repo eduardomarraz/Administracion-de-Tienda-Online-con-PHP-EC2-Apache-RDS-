@@ -10,7 +10,7 @@ Pasos:
 Configuración de una Instancia EC2 en AWS
 Este repositorio contiene instrucciones detalladas para configurar una instancia EC2 en AWS y establecer un servidor web utilizando Apache y PHP.
 
-#### Step 1:
+#### Paso 1:
 Paso 1: Configuración de la Instancia EC2
 Inicia sesión en la Consola de AWS y navega a EC2:
 Inicia sesión en tu cuenta de AWS y dirígete al servicio EC2.
@@ -21,7 +21,7 @@ Elige el tipo de instancia t2.micro.
 Configura adecuadamente los ajustes de seguridad para permitir el tráfico HTTP y SSH.
 Crea una nueva clave de par de claves o utiliza una existente para acceder a tu instancia mediante SSH.
 Lanza la instancia.
-#### Step 2:
+#### Paso 2:
 Una vez que la instancia EC2 esté en funcionamiento, necesitarás conectarte a ella mediante SSH. Sigue estos pasos para hacerlo:
 
 Abre tu terminal o cliente SSH:
@@ -35,7 +35,7 @@ Reemplaza "ruta/a/tu/clave.pem" con la ruta a tu clave de par de claves y "direc
 Inicia sesión en la instancia:
 Una vez conectado, estarás dentro de la instancia EC2 y podrás comenzar a trabajar en ella.
 Con estos pasos, habrás establecido una conexión SSH con tu instancia EC2 en AWS y podrás proceder con la configuración y despliegue de tu aplicación.
-#### Step 3:
+#### Paso 3:
 Paso 3: Paso 3: Instalación y Configuración del Servidor Web Apache con PHP
 Ahora que estás conectado a tu instancia EC2, es hora de instalar y configurar el servidor web Apache con soporte para PHP. A continuación, se detallan los pasos a seguir:
 
@@ -82,7 +82,7 @@ Crea una carpeta llamada "proyecto" y dentro de ella crea dos subdirectorios lla
 ```json
 mkdir proyecto && cd proyecto/html
 ```
-Paso 4: Crear una Lambda y un Tópico SNS
+#### Paso 4: Crear una Lambda y un Tópico SNS
 En esta etapa, configuraremos una función Lambda y un tópico SNS para manejar las notificaciones de nuestra aplicación. Sigue estos pasos:
 
 Crear una función Lambda:
@@ -126,7 +126,7 @@ Elige el tipo de protocolo "Lambda" y selecciona la función Lambda que acabas d
 Haz clic en "Create subscription".
 Con estos pasos, has configurado una función Lambda para manejar las notificaciones de tu aplicación y un tópico SNS para publicar mensajes.
 
-Paso 5: Configuración del Proyecto
+#### Paso 5: Configuración del Proyecto
 Ahora, vamos a configurar el proyecto de nuestra aplicación. Sigue estos pasos:
 
 Crear archivos PHP y HTML:
@@ -184,7 +184,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ```
 Asegúrate de reemplazar los valores de conexión a la base de datos con los adecuados para tu entorno.
 Con estos pasos, has configurado la estructura básica de tu proyecto y has creado los archivos necesarios para tu aplicación.
-Paso 6: Despliegue de la Infraestructura
+
+#### Paso 6: Despliegue de la Infraestructura
 En este paso, vamos a utilizar Docker Compose para desplegar la infraestructura de nuestra aplicación. Sigue estos pasos:
 
 Crear el archivo docker-compose.yml:
@@ -256,7 +257,7 @@ sudo docker-compose up
 ```
 Con estos pasos, habrás desplegado la infraestructura de tu aplicación utilizando Docker Compose en tu instancia EC2.
 
-Paso 7: Automatización de Operaciones
+#### Paso 7: Automatización de Operaciones
 En esta etapa, vamos a automatizar las operaciones de monitoreo de nuestros servicios Docker. Sigue estos pasos:
 
 Crear el archivo monitoring_services_status.sh:
@@ -316,22 +317,25 @@ Añade la siguiente línea al archivo crontab para ejecutar el script cada minut
 ```
 Reemplaza "ruta/a/tu/script" con la ubicación completa del script en tu instancia EC2.
 Con estos pasos, has automatizado las operaciones de monitoreo de tus servicios Docker y estás enviando métricas a CloudWatch de forma regular.
-Paso 8: Configuración de Alarmas en CloudWatch
+
+#### Paso 8: Configuración de Alarmas en CloudWatch
 En este último paso, vamos a configurar alarmas en CloudWatch para monitorear el estado de nuestros servicios Docker y recibir notificaciones en caso de problemas. Sigue estos pasos:
 
 Verificar las métricas en CloudWatch:
 Accede al servicio CloudWatch desde la consola de AWS.
 Navega a "Metrics" y busca el espacio de nombres "CustomMetrics". Deberías ver las métricas "mysql", "php-webserver" y "phpmyadmin".
-Crear alarmas:
+
 Crear alarmas (continuación):
 Haz clic en "Alarms" en el panel de navegación de CloudWatch.
 Haz clic en "Create alarm".
 Selecciona la métrica correspondiente a uno de tus servicios Docker (por ejemplo, "php-webserver").
 Especifica las condiciones para la alarma. Por ejemplo, puedes configurar la alarma para que se active si la métrica es igual o mayor que 1 durante al menos 1 período de evaluación (que podría ser 1 minuto).
 Haz clic en "Next".
+
 Configura la acción de la alarma para enviar una notificación al tópico SNS que creaste anteriormente.
 Completa el proceso de creación de la alarma.
 Repite estos pasos para crear alarmas para los otros servicios Docker (MySQL y phpMyAdmin).
+
 Probar las alarmas:
 Una vez que las alarmas estén configuradas, puedes probarlas deteniendo uno de los contenedores Docker manualmente (por ejemplo, el contenedor de php-webserver).
 CloudWatch detectará que la métrica correspondiente supera el umbral configurado y activará la alarma.
