@@ -4,7 +4,7 @@
       / ___ \ V  V /  ___) | | |___| | (_) | |_| | (_| |\__, |
      /_/   \_\_/\_/  |____/   \____|_|\___/ \__,_|\__,_|  /_/ 
  ----------------------------------------------------------------- 
-### Resumen de este Proyecto (Spanish):
+### Resumen del Proyecto (Spanish):
 Vamos a realizar en AWS una automatización de mensajes mediante las metricas y alarmas de CloudWatch estableciendo que conforme los contenedores docker (Creados en una EC2) sufran alguna caida o fallo imprevisto, envien un tópico SNS, y luego ese mensaje activa una función Lambda que envía una notificación al canal de Slack "#devops".
 
 ### Project Summary (English): 
