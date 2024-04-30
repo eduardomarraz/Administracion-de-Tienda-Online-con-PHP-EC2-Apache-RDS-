@@ -67,9 +67,9 @@ Descarga el binario de Docker Compose con el siguiente comando:
 ```json
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
-```json
 Dar permisos de ejecución al archivo binario de Docker Compose:
 Haz que el archivo binario de Docker Compose sea ejecutable con el siguiente comando:
+```json
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 Comprobar la instalación de Docker Compose:
