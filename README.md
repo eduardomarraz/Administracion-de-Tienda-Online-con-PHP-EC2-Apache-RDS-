@@ -4,7 +4,7 @@
       / ___ \ V  V /  ___) | | |___| | (_) | |_| | (_| |\__, |
      /_/   \_\_/\_/  |____/   \____|_|\___/ \__,_|\__,_|  /_/ 
  ----------------------------------------------------------------- 
-### Multi-website Practice with AWS CloudFront
+### Multi-website Practice with AWS RDS (Servicio de bases de datos relacionales).
 
 Pasos:
 Configuración de una Instancia EC2 en AWS
