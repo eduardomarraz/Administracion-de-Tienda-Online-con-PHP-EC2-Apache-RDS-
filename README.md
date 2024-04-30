@@ -4,14 +4,17 @@
       / ___ \ V  V /  ___) | | |___| | (_) | |_| | (_| |\__, |
      /_/   \_\_/\_/  |____/   \____|_|\___/ \__,_|\__,_|  /_/ 
  ----------------------------------------------------------------- 
-### Multi-website Practice with AWS CloudFront
+### Resumen de este Proyecto (Spanish):
+Vamos a realizar en AWS una automatización de mensajes mediante las metricas y alarmas de CloudWatch estableciendo que conforme los contenedores docker (Creados en una EC2) sufran alguna caida o fallo imprevisto, envien un tópico SNS, y luego ese mensaje activa una función Lambda que envía una notificación al canal de Slack "#devops".
 
-Pasos:
+### Project Summary (English): 
+We will implement message automation on AWS using CloudWatch metrics and alarms, establishing that as Docker containers (created on an EC2 instance) experience any unexpected failures or crashes, they will send a message to an SNS topic. Then, that message triggers a Lambda function that sends a notification to the Slack channel "#devops".
+
+#### Pasos:
 Configuración de una Instancia EC2 en AWS
 Este repositorio contiene instrucciones detalladas para configurar una instancia EC2 en AWS y establecer un servidor web utilizando Apache y PHP.
 
-#### Paso 1:
-Paso 1: Configuración de la Instancia EC2
+#### Paso 1: Configuración de la Instancia EC2
 Inicia sesión en la Consola de AWS y navega a EC2:
 Inicia sesión en tu cuenta de AWS y dirígete al servicio EC2.
 Lanzamiento de una Nueva Instancia:
@@ -21,9 +24,8 @@ Elige el tipo de instancia t2.micro.
 Configura adecuadamente los ajustes de seguridad para permitir el tráfico HTTP y SSH.
 Crea una nueva clave de par de claves o utiliza una existente para acceder a tu instancia mediante SSH.
 Lanza la instancia.
-#### Paso 2:
-Una vez que la instancia EC2 esté en funcionamiento, necesitarás conectarte a ella mediante SSH. Sigue estos pasos para hacerlo:
 
+#### Paso 2: Una vez que la instancia EC2 esté en funcionamiento, necesitarás conectarte a ella mediante SSH. Sigue estos pasos para hacerlo:
 Abre tu terminal o cliente SSH:
 Utiliza tu terminal o un cliente SSH como PuTTY si estás en un sistema operativo Windows.
 Conéctate a la instancia EC2:
@@ -35,8 +37,8 @@ Reemplaza "ruta/a/tu/clave.pem" con la ruta a tu clave de par de claves y "direc
 Inicia sesión en la instancia:
 Una vez conectado, estarás dentro de la instancia EC2 y podrás comenzar a trabajar en ella.
 Con estos pasos, habrás establecido una conexión SSH con tu instancia EC2 en AWS y podrás proceder con la configuración y despliegue de tu aplicación.
-#### Paso 3:
-Paso 3: Paso 3: Instalación y Configuración del Servidor Web Apache con PHP
+
+#### Paso 3: Instalación y Configuración del Servidor Web Apache con PHP
 Ahora que estás conectado a tu instancia EC2, es hora de instalar y configurar el servidor web Apache con soporte para PHP. A continuación, se detallan los pasos a seguir:
 
 Actualizar librerías:
