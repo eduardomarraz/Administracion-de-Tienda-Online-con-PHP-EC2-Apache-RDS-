@@ -82,6 +82,18 @@ Crea una carpeta llamada "proyecto" y dentro de ella crea dos subdirectorios lla
 ```json
 mkdir proyecto && cd proyecto/html
 ```
+Dentro de este directorio Ejectuar los siguientes comandos para instalar php:
+```json
+sudo yum install php  php-cli php-json  php-mbstring  -y 
+
+sudo php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" 
+
+sudo php composer-setup.php 
+
+sudo php -r "unlink('composer-setup.php');" 
+
+sudo php composer.phar require aws/aws-sdk-php 
+```
 #### Paso 4: Crear una Lambda y un Tópico SNS
 En esta etapa, configuraremos una función Lambda y un tópico SNS para manejar las notificaciones de nuestra aplicación. Sigue estos pasos:
 
@@ -132,8 +144,51 @@ Ahora, vamos a configurar el proyecto de nuestra aplicación. Sigue estos pasos:
 Crear archivos PHP y HTML:
 Dentro del directorio "html" de tu proyecto, crea los siguientes archivos:
 info.php: Contiene la información de PHP.
+```json
+<?php phpinfo(); ?> 
+```
 index.html: Es la página principal de la aplicación.
-Puedes utilizar el contenido proporcionado en la sección correspondiente de esta guía para cada archivo.
+```json
+<!DOCTYPE html>  
+
+<html lang="en">  
+
+<head>  
+
+    <meta charset="UTF-8">  
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+
+    <title>Contact Form</title>  
+
+</head>  
+
+<body>  
+
+    <h1>Contact Form</h1>  
+
+    <form action="submit.php" method="POST">  
+
+        <label for="name">Name:</label><br>  
+
+        <input type="text" id="name" name="name" required><br>  
+
+        <label for="email">Email:</label><br>  
+
+        <input type="email" id="email" name="email" required><br>  
+
+        <label for="message">Message:</label><br>  
+
+        <textarea id="message" name="message" rows="4" required></textarea><br>  
+
+        <input type="submit" value="Submit">  
+
+    </form>  
+
+</body>  
+
+</html> 
+```
 Crear archivo submit.php:
 Crea un archivo llamado "submit.php" dentro del directorio "html" para manejar el envío de formularios.
 Copia y pega el siguiente código en el archivo para manejar el envío del formulario y almacenar los datos en una base de datos MySQL.
@@ -184,6 +239,59 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ```
 Asegúrate de reemplazar los valores de conexión a la base de datos con los adecuados para tu entorno.
 Con estos pasos, has configurado la estructura básica de tu proyecto y has creado los archivos necesarios para tu aplicación.
+
+#### Creamos el Dockerfile de nuestro servicio php, dentro de la carpeta “php”:
+```json
+# Use an official PHP Apache runtime 
+
+FROM php:8.2-apache 
+
+# Enable Apache modules 
+
+RUN a2enmod rewrite  
+
+# Install PostgreSQL client and its PHP extensions 
+
+RUN apt-get update \ 
+
+    && apt-get install -y libpq-dev \ 
+
+    && docker-php-ext-install pdo pdo_pgsql 
+
+# Install MySQLi extension 
+
+RUN docker-php-ext-install mysqli   
+
+# Set the working directory to /var/www/html 
+
+WORKDIR /var/www/html 
+
+# Copy the PHP code file in /app into the container at /var/www/html 
+
+COPY ../html . 
+```
+#### Creamos el script sql  llamado create_table.sql en la ruta raiz del proyecto que creara nuestra tabla del formulario , y le damos permisos de ejecución y lectura con el comando “chmod +xr create_table.sql” :
+```json
+CREATE TABLE IF NOT EXISTS form_data ( 
+
+    id INT AUTO_INCREMENT PRIMARY KEY, 
+
+    name VARCHAR(255) NOT NULL, 
+
+    email VARCHAR(255) NOT NULL, 
+
+    message TEXT NOT NULL, 
+
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP 
+); 
+```
+Creamos el directorio “mysql_data” en la ruta raiz del proyecto donde persistiran nuestros datos. 
+
+#### Añadir Rol a la EC2 
+
+Vamos a la consola de la EC2, vamos a acciones -> seguridad -> Añadir Rol 
+Elegimos el Rol “LabInstanceProfile” 
+Luego vamos al servicio IAM y buscamos este Rol, y añadimos la politica “CloudWatchFullAccess” 
 
 #### Paso 6: Despliegue de la Infraestructura
 En este paso, vamos a utilizar Docker Compose para desplegar la infraestructura de nuestra aplicación. Sigue estos pasos:
@@ -313,7 +421,7 @@ crontab -e
 ```
 Añade la siguiente línea al archivo crontab para ejecutar el script cada minuto:
 ```json
-Añade la siguiente línea al archivo crontab para ejecutar el script cada minuto:
+* * * * * /home/nombre_del_usuario/proyecto/monitoring_services_status.sh
 ```
 Reemplaza "ruta/a/tu/script" con la ubicación completa del script en tu instancia EC2.
 Con estos pasos, has automatizado las operaciones de monitoreo de tus servicios Docker y estás enviando métricas a CloudWatch de forma regular.
